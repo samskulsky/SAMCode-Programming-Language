@@ -1,0 +1,30 @@
+* SAMCode v0.1-alpha / BMI
+* Ask for weight in pounds
+	write Enter weight in pounds:
+		input as num: weightInPounds
+* Ask for height in inches
+	write \nEnter height in inches:
+		input as num: heightInInches
+* Convert pounds to kilograms
+	num weightInKilograms: weightInPounds / 2.205
+* Convert inches to meters
+	num heightInMeters: heightInInches / 39.37
+* Calculate the height squared
+	num heightSquared: heightInMeters * heightInMeters
+* Calculate the BMI
+	num BMI: weightInKilograms / heightSquared
+		write \nBMI: (BMI)
+* Initialize category to underweight
+	text category: underweight
+* Check for other categories
+	if BMI >= 18.5 AND BMI < 24.9:
+		category: normal
+		endif
+	if BMI >= 25.0 AND BMI < 30:
+		category: overweight
+		endif
+	if BMI >= 30:
+		category: obtuse
+		endif
+* Write the category
+	write \n\nCategory: (category)\n\n

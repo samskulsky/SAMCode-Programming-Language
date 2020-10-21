@@ -1,0 +1,14 @@
+* SAMCode v0.1-alpha / EvenOrOdd
+* Ask for a number
+	write Tell me a number:
+* Take in input
+	input as num: number
+* Create a num that will be 0 if even
+	num remainder: number % 2
+* Check if even
+	if remainder = 0:
+		write (number) is even!
+		endif
+	if remainder != 0:
+		write (number) is odd!
+		endif
