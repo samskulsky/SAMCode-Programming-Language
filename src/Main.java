@@ -3,29 +3,30 @@ import java.util.*;
 
 class Main {
 
-	public static String file = "main.samc";
+    public static String file = "main.samc";
 
-	public static List<String> lines = new ArrayList<String>();
+    public static List<String> lines = new ArrayList<String>();
 
-  public static void main(String[] args) throws FileNotFoundException {
-		Scanner keyboard = new Scanner(System.in);
-		System.out.println("\n\u001b[4m\u001b[32;1mSAMCODE V0.1 (Alpha)\u001b[0m");
-		System.out.print("Enter file name: ");
-		file = keyboard.nextLine() + ".samc";
-		System.out.println("--------------------------------");
+    public static void main(String[] args) throws FileNotFoundException {
 
-		Lexer lexer = new Lexer();
+        Scanner keyboard = new Scanner(System.in);
+        System.out.println("\n\u001b[4m\u001b[32;1mSAMCODE V0.1 (Alpha)\u001b[0m");
+        System.out.print("Enter file name: ");
+        file = keyboard.nextLine() + ".samc";
+        System.out.println("--------------------------------");
 
-    FileReader fr = new FileReader(new File(file));
-		Scanner inFile = new Scanner(fr);
+        Lexer lexer = new Lexer();
 
-		while (inFile.hasNextLine()) {
-			lines.add(inFile.nextLine());
-		}
+        FileReader fr = new FileReader(new File(file));
+        Scanner inFile = new Scanner(fr);
 
-		lexer.Tokenize(lines);
+        while (inFile.hasNextLine()) {
+            lines.add(inFile.nextLine());
+        }
 
-		System.exit(0);
+        lexer.Tokenize(lines);
 
-  }
+        System.exit(0);
+
+    }
 }

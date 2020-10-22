@@ -121,12 +121,49 @@ public class Lexer {
 			key = key.replace(":", "");
 			double value = 0;
 			String next = inLine.next();
-			if (variables.getVariableType(next) == tokenType.NUM) {
+			if (next.equals("RANDOM")) {
+				String random = inLine.nextLine();
+				random = random.replaceAll(" ", "");
+				if (random.charAt(0) == '[' && random.charAt(random.length()-1) == ']') {
+					random = random.replace("[","");
+					random = random.replace("]", "");
+					String[] values = random.split(",");
+					double minValue = 0, maxValue = 0;
+					try {
+						if (variables.getVariableType(values[0]) == tokenType.NUM) {
+							minValue = variables.getNumVariable(values[0]);
+						} else {
+							try {
+								minValue = Double.parseDouble(values[0]);
+							} catch (NumberFormatException nfe) {
+								errorSystem.throwError("A num variable must be made of nums");
+							}
+						}
+
+						if (variables.getVariableType(values[1]) == tokenType.NUM) {
+							maxValue = variables.getNumVariable(values[1]);
+						} else {
+							try {
+								maxValue = Double.parseDouble(values[1]);
+							} catch (NumberFormatException nfe) {
+								errorSystem.throwError("A num variable must be made of nums");
+							}
+						}
+
+						variables.setRandomNumVariable(key, minValue, maxValue);
+					} catch (ArrayIndexOutOfBoundsException arrayIndexOutOfBoundsException) {
+						errorSystem.throwError("RANDOM statements must be followed by a min and max value in brackets");
+					}
+				} else {
+					errorSystem.throwError("RANDOM statements must be followed by a min and max value in brackets");
+				}
+			} else if (variables.getVariableType(next) == tokenType.NUM) {
 				value = variables.getNumVariable(next);
 			} else {
 				try {
 					value = Double.parseDouble(next);
 				} catch (NumberFormatException nfe) {
+					errorSystem.throwError("A num variable must be made of nums");
 				}
 			}
 			double previousValue = value;
@@ -140,6 +177,7 @@ public class Lexer {
 					try {
 						currentValue = Double.parseDouble(next);
 					} catch (NumberFormatException nfe) {
+						errorSystem.throwError("A num variable must be made of nums");
 					}
 				}
 				switch (operator) {

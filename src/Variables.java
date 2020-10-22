@@ -83,4 +83,18 @@ public class Variables {
 			errorSystem.throwError("Invalid num name (" + key + ")");
 		}
 	}
+
+	public void setRandomNumVariable(String key, double startingValue, double endingValue) {
+		double value = Math.random()*endingValue+startingValue;
+		if (key.matches("^[a-zA-Z_$][a-zA-Z_$0-9]*$")) {
+			if (nums.contains(key)) {
+				nums.replace(key, value);
+			} else {
+				nums.put(key, value);
+			}
+		} else {
+			ErrorSystem errorSystem = new ErrorSystem();
+			errorSystem.throwError("Invalid num name (" + key + ")");
+		}
+	}
 }
